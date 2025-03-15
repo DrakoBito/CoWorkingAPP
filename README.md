@@ -1,4 +1,3 @@
-# CoWorkingAPP
 🚀 Coworking Management API
 ⚠️ ADVERTENCIA
 Las credenciales en texto plano dentro de application.properties son solo para fines de prueba técnica. Esto NO es recomendable en un entorno de producción.
@@ -12,7 +11,7 @@ Para ejecutar este proyecto, asegúrate de tener instalado:
 1️⃣ Clonar el Repositorio
 bash
 Copiar código
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/DrakoBito/CoWorkingAPP.git
 cd CoworkingManagement
 2️⃣ Construir y Ejecutar los Contenedores con Docker
 bash
@@ -31,11 +30,11 @@ GET /spaces
 json
 Copiar código
 [
-  {
-    "id": 1,
-    "name": "Sala de reuniones",
-    "description": "Espacio con proyector y pizarra"
-  }
+{
+"id": 1,
+"name": "Sala de reuniones",
+"description": "Espacio con proyector y pizarra"
+}
 ]
 📅 Gestión de Reservas (Reservations)
 📌 Obtener todas las reservas
@@ -45,13 +44,13 @@ GET /reservations
 json
 Copiar código
 [
-  {
-    "id": 1,
-    "user": { "id": 1, "name": "Juan", "email": "juan2@gmail.com" },
-    "space": { "id": 1, "name": "Sala de reuniones", "description": "Espacio con proyector y pizarra" },
-    "date": "2025-03-15",
-    "startTime": "08:01:01"
-  }
+{
+"id": 1,
+"user": { "id": 1, "name": "Juan", "email": "juan2@gmail.com" },
+"space": { "id": 1, "name": "Sala de reuniones", "description": "Espacio con proyector y pizarra" },
+"date": "2025-03-15",
+"startTime": "08:01:01"
+}
 ]
 📌 Crear una reserva
 POST /reservations
@@ -60,9 +59,9 @@ POST /reservations
 json
 Copiar código
 {
-  "spaceId": 1,
-  "date": "2025-03-15",
-  "startTime": "08:01:01"
+"spaceId": 1,
+"date": "2025-03-15",
+"startTime": "08:01:01"
 }
 🔐 Autenticación
 📌 Registro de usuario
@@ -72,9 +71,9 @@ POST /register
 json
 Copiar código
 {
-  "name": "Juan",
-  "email": "juan2@gmail.com",
-  "password": "claveSecreta"
+"name": "Juan",
+"email": "juan2@gmail.com",
+"password": "claveSecreta"
 }
 📌 Inicio de sesión
 POST /login
@@ -83,14 +82,14 @@ POST /login
 json
 Copiar código
 {
-  "email": "juan2@gmail.com",
-  "password": "claveSecreta"
+"email": "juan2@gmail.com",
+"password": "claveSecreta"
 }
 📥 Response: (Token JWT)
 json
 Copiar código
 {
-  "token": "eyJhbGciOiJIUzUxMiJ9..."
+"token": "eyJhbGciOiJIUzUxMiJ9..."
 }
 Para acceder a endpoints protegidos, debes incluir el token en la cabecera Authorization:
 

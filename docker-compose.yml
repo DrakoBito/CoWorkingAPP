@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  cowork-app:
+    build: .
+    container_name: cowork-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/gestor"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "150919"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.MySQLDialect"
+      JWT_SECRET: "qH9p8h45jMdlk6rH8Y9n3G9Zq9sB5lD9sJgK7hT2nM5pL8aF4Y5hN3gPq9J6lD2H8adawd45grgf9as919f48f0417tyfhfnc18748cb1"
+      SERVER_PORT: "8080"
+      SPRING_PROFILES_ACTIVE: "prod"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    networks:
+      - cowork-network
+
+  db:
+    image: mysql:8.0
+    container_name: cowork-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: "gestor"
+      MYSQL_ROOT_PASSWORD: "150919"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - cowork-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
+
+networks:
+  cowork-network:
+    driver: bridge
